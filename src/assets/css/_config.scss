@@ -1,0 +1,349 @@
+@font-face {
+  font-family: "Suisse-Regular";
+  src: url("../webfonts/Suisse-regular.ttf");
+}
+@font-face {
+  font-family: "Suisse-Bold";
+  src: url("../webfonts/Suisse-bold.otf");
+}
+@mixin centerFlex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@mixin centerAbsolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@mixin clearInput {
+  border: none;
+  background: none;
+  outline: none;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  line-height: 36px;
+  scroll-behavior: smooth;
+  direction: rtl;
+  font-family: "Suisse-Regular", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  position: relative;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+button {
+  border: none;
+  background-color: unset;
+}
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+::-webkit-scrollbar-thumb {
+  background: #eee;
+  height: 300px;
+}
+
+input[type="number"] {
+  &::-webkit-outer-spin-button {
+    display: none;
+  }
+  &::-webkit-inner-spin-button {
+    display: none;
+  }
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+$main: #121212;
+$second: #0045ba;
+$second20: #E4EEFF80;
+$dashboardBg: #f2f4f7;
+$gray: #667085;
+$cardBg: #fcfcfd;
+$border: #eaecf0;
+$inputBG: #f9fafb;
+$white: #fff;
+$inputHint: #aaaaaa;
+$grayLight: #777777cc;
+$lightGray: #eeeeee;
+$text: #666b88;
+$JumbotronHead: #4f4f4f;
+$inputStroke: #f2f2f2;
+$transation: 0.3s ease-in-out;
+
+.conatiner {
+  padding: 0;
+}
+
+.table-container {
+  white-space: nowrap !important;
+  border: 1px solid $border;
+  overflow: hidden;
+  border-radius: 12px !important;
+  tbody tr {
+    border-bottom: 1px solid $border;
+    td {
+      padding: 12px 16px;
+    }
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+  .p-datatable-thead {
+    background: $inputBG;
+    border-bottom: 1px solid $border;
+    .p-column-header-content {
+      padding: 12px 16px;
+      color: $gray;
+      font-size: 14px;
+    }
+  }
+  .status-success {
+    padding: 0 8px;
+    border-radius: 100px;
+    color: $white;
+    width: 90px;
+    font-size: 15px;
+    display: flex;
+    margin-left: auto;
+    justify-content: center;
+  }
+  .status-danger {
+    padding: 0 8px;
+    font-size: 15px;
+    border-radius: 100px;
+    color: $white;
+    width: 90px;
+    display: flex;
+    margin-left: auto;
+    justify-content: center;
+  }
+  .form-check-input {
+    margin-top: 12px;
+    cursor: pointer;
+    box-shadow: none !important;
+  }
+}
+
+.status-Ended {
+  background: #fef3f2;
+  border-radius: 50%;
+  border: 1px solid #fecdca;
+  color: #b42318;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px;
+  border-radius: 30px;
+}
+.status-Started {
+  background: #ecfdf3;
+  border-radius: 50%;
+  border: 1px solid #abefc6;
+  color: #067647;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px;
+  border-radius: 30px;
+}
+.status-Scheduled {
+  background: #eff8ff;
+  border-radius: 50%;
+  border: 1px solid #b2ddff;
+  color: #175cd3;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 8px;
+  border-radius: 30px;
+}
+
+.form-check .form-check-input {
+  margin-left: 0 !important;
+}
+
+.Toastify__toast-body {
+  direction: ltr !important;
+}
+.Toastify__toast-body > div:last-child {
+  line-height: 24px;
+  flex: unset;
+  font-size: 14px;
+  gap: 8px;
+}
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    right: 0;
+    left: initial;
+  }
+}
+.Toastify__toast-icon {
+  margin-inline-start: 8px;
+  margin-inline-end: 0;
+}
+
+.form-check-input:checked {
+  background-color: $second;
+  border-color: $second;
+}
+
+.tableLoader {
+  @include centerFlex();
+  flex-direction: column;
+  .loader--style8 {
+    width: 80px;
+    height: 80px;
+  }
+  svg path,
+  svg rect {
+    fill: $second;
+  }
+}
+
+.actions {
+  .dropdown-toggle {
+    height: 36px;
+    width: 36px;
+    border-radius: 100px;
+    border: 0;
+    background-color: #fff;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:active {
+      background: none;
+      border: 0;
+    }
+    svg {
+      height: 20px;
+    }
+    img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+    }
+    &::after {
+      display: none;
+    }
+  }
+  .dropdown-menu {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    width: 120px;
+    .dropdown-item {
+      padding: 0 12px;
+      button,
+      a {
+        padding: 4px 0;
+        background: none !important;
+        text-align: right;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: $main;
+        gap: 8px;
+        font-size: 14px;
+        img {
+          height: 16px;
+        }
+      }
+    }
+  }
+}
+
+.no-data {
+  height: 240px;
+  width: 100%;
+  @include centerFlex();
+  font-size: 32px;
+  font-weight: 600;
+  color: $lightGray;
+}
+
+.table-title {
+  color: $main;
+  font-size: 24px;
+  margin-top: 16px;
+  &.blue {
+    color: $second;
+  }
+}
+
+.ReactFlagsSelect-module_selectBtn__19wW7 {
+  border: 1px solid $border !important;
+  height: 54px;
+  border-radius: 8px;
+  box-shadow: none;
+  outline: none;
+  color: $inputHint;
+}
+.ReactFlagsSelect-module_filterBox__3m8EU {
+  padding: 8px;
+  input {
+    margin: 0;
+  }
+}
+.ReactFlagsSelect-module_flagsSelect__2pfa2 {
+  padding-bottom: 0;
+}
+.ReactFlagsSelect-module_selectOptions__3LNBJ {
+  font-size: 16px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border: 0;
+  max-height: 208px;
+  border-radius: 8px;
+  scrollbar-width: none;
+  input {
+    height: 48px !important;
+    border-radius: 8px !important;
+  }
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+.ReactFlagsSelect-module_filterBox__3m8EU input {
+  border: 1px solid $inputStroke;
+  width: 100%;
+}
+.ReactFlagsSelect-module_label__27pw9,
+.ReactFlagsSelect-module_secondaryLabel__37t1D {
+  padding-left: 0;
+  padding-right: 12px;
+}
+
+.modal-header {
+  border-bottom: 0;
+  .btn-close {
+    box-shadow: none !important;
+    background-image: url("/assets/images/close.svg");
+    margin: 0;
+    margin-inline-start: auto;
+  }
+  h6 {
+    color: $main;
+    margin-bottom: 0;
+  }
+}

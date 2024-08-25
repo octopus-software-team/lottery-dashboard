@@ -1,0 +1,1086 @@
+@import "./config";
+
+body {
+  background: $dashboardBg;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(120px);
+  }
+}
+
+.loader {
+  width: 100%;
+  height: 100dvh;
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+  left: 0;
+  background: var(--white-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  img {
+    height: 70px;
+  }
+  span {
+    width: 120px;
+    height: 2px;
+    background: $border;
+    position: relative;
+    overflow: hidden;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 24px;
+      background: $second;
+      height: 100%;
+      animation: loading 0.5s linear infinite alternate;
+    }
+  }
+}
+
+.navbar {
+  height: 88px;
+  background: $white;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  .logo {
+    flex: 1;
+    img {
+      height: 100%;
+    }
+  }
+  .nav_menu {
+    flex: 3;
+    @include centerFlex();
+    gap: 24px;
+    li {
+      position: relative;
+    }
+    .nav_link {
+      color: $gray;
+      font-size: 14px;
+      font-weight: 500;
+      position: relative;
+      transition: $transation;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      gap: 8px;
+      padding: 4px;
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: $main;
+        transition: $transation;
+      }
+      &.active {
+        color: $main;
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .user_dropdown {
+    flex: 1;
+    display: flex;
+    justify-content: end;
+    .button_drop {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+    .user {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: $inputBG;
+      @include centerFlex();
+      border: 1px solid $border;
+      position: relative;
+      .status {
+        position: absolute;
+        bottom: 0;
+        right: -2px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: $second20;
+        border: 1px solid $white;
+      }
+    }
+  }
+}
+
+.dropMenu {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  width: 200px;
+  transform: translateX(-50%);
+  border-radius: 24px;
+  padding: 16px 24px;
+  background: $white;
+  box-shadow: 0px 0px 0px 1px #0000000D, 0px 4px 6px -2px #0000000D,
+    0px 10px 15px -3px #0000001A;
+  display: none;
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .nav_link {
+    gap: 16px !important;
+    display: flex;
+    align-items: center;
+    .icon {
+      width: 32px;
+      height: 32px;
+      background: $second;
+      border-radius: 8px;
+      @include centerFlex();
+      img {
+        height: 16px;
+      }
+    }
+    h6 {
+      margin: 0;
+      font-size: 14px;
+      color: $main;
+      font-weight: 600;
+    }
+    &::after {
+      display: none;
+    }
+  }
+  &.show {
+    display: block;
+  }
+}
+
+.main {
+  padding: 64px 0;
+  .page_header {
+    background: $white;
+    padding: 24px 40px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    .home {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h6,
+    a {
+      margin: 0;
+      color: $main;
+      line-height: 18px;
+      padding: 8px 12px;
+      &.active {
+        background: $second20;
+        border-radius: 6px;
+      }
+    }
+  }
+  .inner_card {
+    background: $white;
+    padding: 24px;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    .header {
+      @include space-between();
+      h1 {
+        font-weight: 600;
+        margin: 0;
+        font-size: 24px;
+      }
+      .search_form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        .input_field {
+          background: $inputBG;
+          border: 1px solid $border;
+          border-radius: 50px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 5px 24px;
+          img {
+            width: 24px;
+          }
+          input {
+            @include clearInput();
+          }
+        }
+        button,
+        a {
+          outline: none;
+          border: none;
+          background: $second;
+          padding: 6px 24px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: $white;
+          border-radius: 50px;
+        }
+      }
+    }
+    .day_field {
+      width: 100%;
+      .content {
+        display: flex;
+        border: 1px solid $border;
+        padding: 12px;
+        border-radius: 16px;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+        background: $inputBG;
+        flex-direction: column;
+        cursor: pointer;
+        h6 {
+          margin: 0;
+        }
+      }
+      input {
+        appearance: none;
+        display: none;
+        &:checked + .content {
+          background: $second20;
+          color: $second;
+          border: 1px solid $second;
+        }
+      }
+    }
+    .lottery_card {
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      background: $cardBg;
+      border: 1px solid $border;
+      .img {
+        width: 100%;
+        aspect-ratio: 3 / 2;
+        position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+          object-position: center;
+          object-fit: cover;
+        }
+        .timer {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          background: #FFFFFFd9;
+          z-index: 9;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 12px 0;
+          gap: 8px;
+          .center {
+            padding-bottom: 20px !important;
+          }
+          .block {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            span {
+              line-height: 26px;
+            }
+          }
+          .box {
+            border: 1px solid $second;
+            color: $main;
+            @include centerFlex();
+            padding: 2px 8px;
+            border-radius: 8px;
+            line-height: 25px;
+          }
+        }
+      }
+      .content {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        h4 {
+          color: $main;
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
+        p {
+          margin: 0;
+          display: flex;
+          gap: 8px;
+          align-items: center;
+          font-size: 12px;
+          img {
+            height: 16px;
+          }
+        }
+      }
+      .view_lottery {
+        width: 100%;
+        padding: 12px 16px;
+        border-top: 1px solid $border;
+        color: $main;
+        @include centerFlex();
+        background: $inputBG;
+      }
+    }
+    .lotteries-pagination {
+      display: flex;
+      justify-content: center;
+      .swiper-pagination-bullet {
+        background: $second;
+        width: 20px;
+        height: 6px;
+        border-radius: 12px;
+        &.swiper-pagination-bullet-active {
+          width: 48px;
+          transition: $transation;
+        }
+      }
+    }
+    .lotteries_type {
+      width: 100%;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      background: $cardBg;
+      border-radius: 200px;
+      border: 1px solid $dashboardBg;
+      label {
+        flex: 1;
+        cursor: pointer;
+        width: 100%;
+        .content {
+          @include centerFlex();
+          padding: 12px;
+          border-radius: 200px;
+          transition: $transation;
+          h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: $main;
+          }
+        }
+        input {
+          appearance: none;
+          display: none;
+          &:checked + .content {
+            background: #e4eeff;
+            color: $second;
+          }
+        }
+      }
+    }
+    .wizard_tabs {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+      justify-content: space-between;
+      &::after {
+        content: "";
+        width: 100%;
+        height: 1px;
+        background: $border;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+      }
+      .tab {
+        display: flex;
+        background: $white;
+        z-index: 1;
+        align-items: center;
+        gap: 12px;
+        padding: 16px;
+        transition: $transation;
+        cursor: pointer;
+        .circle_icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 2px solid $border;
+          @include centerFlex();
+          position: relative;
+          transition: $transation;
+          span {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: $border;
+            @include centerAbsolute();
+            transition: $transation;
+          }
+        }
+        h6 {
+          color: $gray;
+          margin: 0;
+          transition: $transation;
+        }
+        &.active {
+          .circle_icon {
+            border-color: $second;
+            span {
+              background: $second;
+            }
+          }
+          h6 {
+            color: $second;
+          }
+        }
+      }
+    }
+    .lottery_info {
+      padding: 0 16px;
+      ul {
+        display: flex;
+        li {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          width: 50%;
+        }
+      }
+    }
+    .start_lottery_img {
+      width: 100%;
+      height: 360px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+    }
+    .check_lottery {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      label {
+        width: 100%;
+        .content {
+          display: flex;
+          border: 1px solid $border;
+          padding: 12px;
+          height: 100%;
+          border-radius: 8px;
+          gap: 8px;
+          height: 50px;
+          align-items: center;
+          justify-content: center;
+          background: $inputBG;
+          flex-direction: column;
+          cursor: pointer;
+          h6 {
+            margin: 0;
+          }
+        }
+        input {
+          appearance: none;
+          display: none;
+          &:checked + .content {
+            background: $second20;
+            color: $second;
+            border: 1px solid $second;
+          }
+        }
+      }
+    }
+    .submit_btn {
+      background: $second;
+      color: $white;
+      border-radius: 80px;
+      padding: 4px 24px;
+    }
+  }
+  .row_img {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    h6 {
+      margin: 0;
+    }
+    img {
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      height: 64px;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  .delete_icon {
+    cursor: pointer;
+  }
+}
+
+.login {
+  width: 100dvw;
+  height: 100dvh;
+  @include centerFlex();
+  .login_form {
+    width: 50%;
+    background: $white;
+    padding: 32px 24px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    .logo img {
+      height: 100px;
+    }
+    h1 {
+      font-size: 24px;
+      color: $main;
+      font-weight: 600;
+    }
+    .form_ui {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      button {
+        width: 100%;
+        height: 52px;
+        background: $second;
+        color: $white;
+        border-radius: 8px;
+        font-size: 16px;
+        margin-top: 16px;
+      }
+    }
+  }
+}
+
+.form_ui {
+  width: 100%;
+  .input-field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    input,
+    select,
+    textarea {
+      width: 100%;
+      height: 52px;
+      display: block;
+      outline: none;
+      border: 1px solid $border;
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: $main;
+      box-shadow: none !important;
+      &::placeholder {
+        color: $gray;
+      }
+    }
+    textarea {
+      height: 152px;
+      line-height: 24px;
+    }
+    label {
+      color: $gray;
+      font-weight: 500;
+      span {
+        font-size: 12px;
+        color: $gray;
+      }
+    }
+    select {
+      color: $main;
+      cursor: pointer;
+      &.disable {
+        pointer-events: none;
+        background: $border;
+        color: $grayLight;
+      }
+    }
+    &.files {
+      .filepond--root .filepond--drop-label {
+        min-height: 100%;
+        label {
+          color: $inputHint;
+          font-size: 14px !important;
+          font-weight: 400 !important;
+          line-height: 18px !important;
+        }
+      }
+    }
+    .checkboxs_inputs {
+      display: flex;
+      width: 100%;
+      height: 54px;
+      border: 1px solid $inputStroke;
+      border-radius: 12px;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      label {
+        cursor: pointer;
+        flex: 1;
+        @include centerFlex();
+        span {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 20px;
+          color: $main;
+          cursor: pointer;
+          transition: $transation;
+        }
+        input {
+          display: none;
+          appearance: none;
+          &:checked + span {
+            color: $white;
+          }
+        }
+      }
+      .bg-active {
+        transition: $transation;
+        position: absolute;
+        content: "";
+        top: 0;
+        transform: translateX(0);
+        height: 100%;
+        width: 50%;
+        z-index: -1;
+        background: $main;
+        border-radius: 12px;
+        &.refuse {
+          transform: translateX(100%);
+        }
+      }
+    }
+    .filepond--root .filepond--drop-label label {
+      color: #e2e2e2 !important;
+      &.mainImg {
+        color: $main !important;
+      }
+    }
+  }
+  .check_field {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px dashed $inputHint;
+    border-radius: 12px;
+  }
+  .title {
+    font-size: 16px;
+    color: $main;
+    font-weight: 600;
+  }
+  .img_field {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    width: fit-content;
+    .img {
+      background: #f5f5f5;
+      border: 1px solid $border;
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      border-radius: 50%;
+      @include centerFlex();
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+    .icon {
+      width: 50%;
+      height: 50%;
+      display: flex;
+      img {
+        object-fit: contain;
+      }
+    }
+    .upload {
+      width: fit-content;
+      input {
+        display: none;
+      }
+      .content {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        border: 1px solid $second;
+        padding: 2px 32px;
+        border-radius: 60px;
+        p {
+          margin: 0;
+          color: $second;
+        }
+      }
+    }
+  }
+  .images_upload_field {
+    border: 1px solid $border;
+    border-radius: 12px;
+    padding: 24px;
+    width: 100%;
+    @include centerFlex();
+    flex-direction: column;
+    cursor: pointer;
+    input {
+      display: none;
+    }
+    .content {
+      @include centerFlex();
+      flex-direction: column;
+      .icon {
+        box-shadow: 0px 1px 2px 0px #1018280D;
+        @include centerFlex();
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        border: 1px solid $border;
+        margin-bottom: 16px;
+      }
+      h6 {
+        color: $second;
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      p {
+        margin: 0;
+        color: gray;
+      }
+    }
+  }
+  .submit_btn {
+    background: $second;
+    color: $white;
+    border-radius: 80px;
+    padding: 4px 24px;
+  }
+  .form-check {
+    width: 100%;
+    @include space-between();
+    flex-direction: row-reverse;
+    padding-left: 0 !important;
+    input {
+      cursor: pointer;
+      box-shadow: none !important;
+    }
+    label {
+      width: 100%;
+      display: block;
+      cursor: pointer;
+    }
+  }
+}
+
+.select_addon_row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  button {
+    min-width: 52px;
+    border-radius: 8px;
+    height: 52px;
+    background: $second;
+    @include centerFlex();
+    &.delete {
+      background: #fef2f2;
+    }
+  }
+  .input-field {
+    input,
+    select {
+      background: $white;
+    }
+    flex: 3;
+    width: 100%;
+    &:last-child {
+      flex: 1;
+    }
+  }
+}
+
+.next,
+.prev {
+  padding: 6px 36px;
+  border: 1px solid $second;
+  border-radius: 60px;
+  color: $second;
+}
+
+.next {
+  background: $second;
+  color: $white;
+}
+
+.pagination_component {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  user-select: none;
+  justify-content: center;
+  img {
+    opacity: 50%;
+    transition: opacity 0.2s;
+  }
+  button:hover {
+    img {
+      opacity: 100%;
+    }
+  }
+  button.disabled:hover {
+    img {
+      opacity: 50%;
+    }
+    cursor: default;
+  }
+  p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    span {
+      color: $main;
+      font-weight: 600;
+    }
+  }
+}
+
+.numbers {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  button {
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    font-size: 15px;
+    color: $main;
+    font-weight: 500;
+    transition: 0.2s;
+    &:hover {
+      background: $cardBg;
+    }
+    &.active {
+      background: $second20;
+    }
+  }
+}
+
+.paginator_btns {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  button {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    @include centerFlex();
+    cursor: pointer;
+    i {
+      color: $gray;
+      font-size: 18px;
+    }
+    &.disabled {
+      opacity: 50%;
+      pointer-events: none;
+    }
+    &:hover i {
+      color: $main;
+    }
+  }
+}
+
+.empty_data {
+  @include centerFlex();
+  flex-direction: column;
+  padding: 24px;
+  gap: 12px;
+  img {
+    height: 274px;
+  }
+  h5 {
+    font-size: 20px;
+    color: $main;
+  }
+  button,
+  a {
+    img {
+      height: 16px;
+    }
+    outline: none;
+    border: none;
+    background: $second;
+    padding: 6px 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $white;
+    border-radius: 50px;
+  }
+}
+
+.confirmation_modal {
+  p {
+    margin-top: 16px;
+    margin-bottom: 4px;
+    color: $main;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    span {
+      line-height: inherit;
+      color: #ff3a29;
+      font-weight: 600;
+    }
+  }
+  .cancel {
+    @include clearInput();
+    height: 44px;
+    width: 100%;
+    border: 1px solid $main;
+    border-radius: 8px;
+    color: $main;
+    &:hover {
+      background: none;
+    }
+  }
+  .confirm {
+    background: $main;
+    height: 44px;
+    width: 100%;
+    color: $white;
+    border-radius: 8px;
+    &:hover {
+      background: $main;
+    }
+    &.red {
+      background: #ff3a29;
+      &:hover {
+        background: #ff3a29;
+      }
+    }
+  }
+}
+
+.winners_div {
+  padding: 0 16px;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: disc;
+    padding: 0 16px 0;
+    margin-top: 12px;
+    li {
+      color: $main;
+      font-size: 16px;
+      line-height: 24px;
+      margin-bottom: 4px;
+      min-width: 300px;
+    }
+  }
+}
+
+.account_form {
+  textarea {
+    height: 100px !important;
+  }
+  .img_field {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    width: fit-content;
+    border: 1px solid $border;
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    h6 {
+      align-self: flex-start;
+    }
+    .img {
+      background: #f5f5f5;
+      border: 1px solid $border;
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      border-radius: 50%;
+      @include centerFlex();
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+    .icon {
+      width: 50%;
+      height: 50%;
+      display: flex;
+      img {
+        object-fit: contain;
+      }
+    }
+    .upload {
+      width: fit-content;
+      input {
+        display: none;
+      }
+      .content {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        border: 1px solid $second;
+        padding: 2px 32px;
+        border-radius: 60px;
+        p {
+          margin: 0;
+          color: $second;
+        }
+      }
+    }
+  }
+}
